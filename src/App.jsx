@@ -1,11 +1,8 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import Login from "./features/identity/components/Login";
+
 
 function App() {
-
-  return (
-<p>پلتفرم آموزش آنلاین</p>
-  )
+  return <Login />;
 }
 
-export default App
+export default App;
