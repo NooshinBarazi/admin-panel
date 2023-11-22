@@ -1,7 +1,7 @@
 import logo from "@assets/images/logo.svg";
 import { useForm } from "react-hook-form";
 import { Link, useActionData, useNavigate, useNavigation, useRouteError, useSubmit } from "react-router-dom";
-import { httpService } from "../../../core/http-service";
+import { httpService } from "@core/http-service";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 const Register = () => {
