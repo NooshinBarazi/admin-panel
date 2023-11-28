@@ -1,8 +1,10 @@
 import logo from "@assets/images/logo.svg";
+import { useAppContext } from "../../contexts/app/app-context";
 
 const Sidebar = () => {
+  const {showSidebar} = useAppContext()
     return ( 
-        <nav className={`sidebar ${collapseSidebar ? 'collapsed' : ''}`}>
+        <nav className={`sidebar ${!showSidebar ? 'collapsed' : ''}`}>
         <div className="sidebar-content">
           <a className="sidebar-brand d-flex flex-column align-items-center pt-0 mb-0">
             <img src={logo} style={{ height: "80px" }} />

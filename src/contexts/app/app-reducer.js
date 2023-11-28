@@ -12,6 +12,11 @@ const appReducer = (state, action) => {
         theme: action.payload,
       };
     }
+    case "TOGGLE_SIDEBAR": {
+      return{
+        ...state, showSidebar: !state.showSidebar
+      }
+    }
   }
 };
 
