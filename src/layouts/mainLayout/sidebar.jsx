@@ -1,17 +1,8 @@
-import { Outlet } from "react-router-dom";
 import logo from "@assets/images/logo.svg";
-import ChangeTheme from "../components/change-theme";
-import ChangeLanguage from "../components/change-language";
-import avatar from '@assets/images/avatar.jpg';
-import { useAppContext } from "../contexts/app/app-context";
-import { useState } from "react";
 
-const MainLayout = () => {
-  const {language} = useAppContext();
-  const [collapseSidebar, setCollapseSidebar] = useState(false);
-  return (
-    <div className="wrapper" style={{ minHeight: "100vh" }}>
-      <nav className={`sidebar ${collapseSidebar ? 'collapsed' : ''}`}>
+const Sidebar = () => {
+    return ( 
+        <nav className={`sidebar ${collapseSidebar ? 'collapsed' : ''}`}>
         <div className="sidebar-content">
           <a className="sidebar-brand d-flex flex-column align-items-center pt-0 mb-0">
             <img src={logo} style={{ height: "80px" }} />
@@ -178,39 +169,7 @@ const MainLayout = () => {
           </ul>
         </div>
       </nav>
-      <div className="main">
-        <nav className="navbar navbar-expand navbar-light navbar-bg">
-          <a className="sidebar-toggle" onClick={() => setCollapseSidebar(!collapseSidebar)}>
-            <i className="hamburger align-self-center"></i>
-          </a>
-          <div className="d-flex align-items-center gap-3">
-          <ChangeLanguage />
-          <ChangeTheme />
-          </div>
-          <img src={avatar} className={`avatar img-fluid rounded-circle ${language === 'fa' ? 'me-auto' : 'ms-auto'}`}/>
-        </nav>
-        <main className="content">
-          <div className="container-fluid p-0">
-            <Outlet />
-          </div>
-        </main>
-        <footer className="footer">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-12">
-                <p className="mb-0">
-                  © 2023 -{" "}
-                  <a href="index.html" className="text-muted">
-                    کلاسبن
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </div>
-  );
-};
-
-export default MainLayout;
+     );
+}
+ 
+export default Sidebar;
