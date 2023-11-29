@@ -21,7 +21,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "CHANGE_THEME", payload: theme });
   };
 
-  const toggleSidebar = (showSidebar) => {
+  const toggleSidebar = () => {
     dispatch({ type: "TOGGLE_SIDEBAR"});
   };
 
