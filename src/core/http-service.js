@@ -6,7 +6,7 @@ export const httpService = axios.create({
   baseURL: BASE_URL,
 });
 
-const httpInterseptedService = axios.create({
+export const httpInterseptedService = axios.create({
   baseURL: BASE_URL,
 });
 
