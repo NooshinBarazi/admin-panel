@@ -1,7 +1,10 @@
+import { Await, defer, useLoaderData } from "react-router-dom";
 import { httpInterseptedService } from "../core/http-service";
 import { CourseList } from "../features/courses/components/course-list";
+import { Suspense } from "react";
 
 const Courses = () => {
+  const data = useLoaderData();
   return (
     <div className="row">
       <div className="col-12">
@@ -11,16 +14,25 @@ const Courses = () => {
             <i class="fas fa-plus ms-2"></i>افزودن دوره جدید
           </a>
         </div>
-        <CourseList />
+        <Suspense fallback = {<p className="text-info"> در حال دریافت اطلاعات ...</p>}>
+          <Await resolve={data.courses}>
+            {(lodedCourses) => <CourseList courses={lodedCourses} />}
+          </Await>
+        </Suspense>
       </div>
     </div>
   );
 };
 
 export async function coursesLoder() {
-  const respose = await httpInterseptedService.get("/Course/list");
-  console.log(respose.data);
-  return respose.data;
+  return defer({
+    courses: loadCourses(),
+  });
 }
+
+const loadCourses = async () => {
+  const respose = await httpInterseptedService.get("/Course/list");
+  return respose.data;
+};
 
 export default Courses;

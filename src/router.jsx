@@ -4,7 +4,7 @@ import Register, { registerAction } from "./features/identity/components/registe
 import IdentityLayout from "./layouts/identity-layout";
 import MainLayout from "./layouts/mainLayout/main-layout";
 import Courses, { coursesLoder } from "./pages/courses";
-import CourseCategories from "./pages/course-ategories";
+import CourseCategories from "./pages/course-categories";
 
 const router = createBrowserRouter([
   {
