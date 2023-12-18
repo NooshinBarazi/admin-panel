@@ -24,12 +24,16 @@ const CourseCategories = () => {
   );
 };
 
-export async function categoriesLoader() {
-  return defer({ categories: loadCategories() });
+export async function categoriesLoader({request}) {
+  return defer({ categories: loadCategories(request) });
 }
 
-const loadCategories = async () => {
-  const respnse = await httpInterseptedService.get("/CourseCategory/sieve");
+const loadCategories = async (request) => {
+  const page = new URL(request.url).searchParams.get('page') || 1;
+  const pageSize = 10;
+  let url = '/CourseCategory/sieve';
+  url+= `?page=${page}&pageSize=${pageSize}`;
+  const respnse = await httpInterseptedService.get(url);
   return respnse.data;
 };
 
