@@ -1,18 +1,19 @@
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useNavigate } from "react-router-dom";
 import { httpInterseptedService } from "../core/http-service";
 import CategoryList from "../features/categories/components/category-list";
 import { Suspense, useState } from "react";
 import Modal from "../components/modal";
-import { useNavigation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import AddCategory from "../features/categories/components/add-category";
 
 const CourseCategories = () => {
   const data = useLoaderData();
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState();
+  const [showAddCategory, setShowAddCategory] = useState(false);
 
-  const navigation = useNavigation();
+  const navigate = useNavigate();
 
   const {t} = useTranslation()
 
@@ -34,7 +35,7 @@ const CourseCategories = () => {
         success: {
           render() {
             const url = new URL(window.location.href);
-            navigation(url.pathname + url.search);
+            navigate(url.pathname + url.search);
             return 'عملیات با موفقیت انجام شد'
           },
         },
@@ -56,10 +57,11 @@ const CourseCategories = () => {
         <div className="col-12">
           <div className="d-flex align-items-center justify-content-between mb-5">
             <h3 className="mb-0">همه دسته ها</h3>
-            <a href="#" class="btn btn-primary fw-bolder  mt-n1">
-              <i class="fas fa-plus ms-2"></i>افزودن دوره جدید
+            <a class="btn btn-primary fw-bolder  mt-n1" onClick={()=> setShowAddCategory(true)}>
+              <i class="fas fa-plus ms-2"></i>افزودن دسته جدید
             </a>
           </div>
+          {showAddCategory && <AddCategory setShowAddCategory={setShowAddCategory}/>}
           <Suspense
             fallback={<p className="text-info"> در حال دریافت اطلاعات ...</p>}
           >
