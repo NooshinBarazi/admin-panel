@@ -5,6 +5,7 @@ import { Suspense, useState } from "react";
 import Modal from "../components/modal";
 import { useNavigation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const CourseCategories = () => {
   const data = useLoaderData();
@@ -12,6 +13,8 @@ const CourseCategories = () => {
   const [selectedCategory, setSelectedCategory] = useState();
 
   const navigation = useNavigation();
+
+  const {t} = useTranslation()
 
   const deleteCategoty = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -27,7 +30,7 @@ const CourseCategories = () => {
     toast.promise(
       response,
       {
-        pending: "در حال حدف...",
+        pending: "در حال حذف...",
         success: {
           render() {
             const url = new URL(window.location.href);
@@ -36,8 +39,8 @@ const CourseCategories = () => {
           },
         },
         error: {
-          render(){
-            return 'عملیات حذف با خطا روبه رو شد'
+          render({data}){
+            return t('categoryList.' + data.respnse.data.code)
           }
         }
       },
