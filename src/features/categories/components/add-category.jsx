@@ -11,7 +11,9 @@ const AddCategory = ({ setShowAddCategory }) => {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
+  const navigate
+  
+  = useNavigate();
   const {t} = useTranslation()
 
   const onSubmit = (data) => {
