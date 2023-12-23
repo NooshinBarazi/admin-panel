@@ -5,7 +5,9 @@ import {useNavigate} from 'react-router-dom'
 
 const TopNav = () => {
   const { toggleSidebar } = useAppContext();
-  const navigate = useNavigate()
+  const {language} = useAppContext();
+  const navigate = useNavigate();
+
   const logout =() => {
     localStorage.removeItem('token')
     navigate('/login')
@@ -15,11 +17,11 @@ const TopNav = () => {
       <a className="sidebar-toggle" onClick={toggleSidebar}>
         <i className="hamburger align-self-center"></i>
       </a>
-      <div className="d-flex align-items-center gap-3 ms-auto me-3">
+      <div className="d-flex align-items-center gap-3 me-3">
         <ChangeLanguage />
         <ChangeTheme />
       </div>
-      <div>
+      <div className={`${language === 'fa'? 'me-auto': 'ms-auto'}`}>
         <button className="btn btn-outline-danger fw-bolder ms-2" onClick={logout}>
           خارج شوید
         </button>
