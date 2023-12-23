@@ -1,7 +1,7 @@
 import logo from "@assets/images/logo.svg";
 import { useAppContext } from "../../contexts/app/app-context";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const { showSidebar } = useAppContext();
@@ -19,7 +19,7 @@ const Sidebar = () => {
             {t("mainLayout.sidebar.courseManagement")}
           </li>
           <li className="sidebar-item">
-            <Link className="sidebar-link" to={'/'}>
+            <NavLink className={({isActive})=> isActive? 'sidear-link active': 'sidebar-link'} to={'/'}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -39,10 +39,10 @@ const Sidebar = () => {
               <span className="align-middle me-2">
                 {t("mainLayout.sidebar.allCourses")}
               </span>
-            </Link>
+            </NavLink>
           </li>
           <li className="sidebar-item">
-            <Link className="sidebar-link" to={'/course-categories'}>
+            <NavLink className={({isActive})=> isActive? 'sidear-link active': 'sidebar-link'} to={'/course-categories'}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -62,7 +62,7 @@ const Sidebar = () => {
               <span className="align-middle me-2">
                 {t("mainLayout.sidebar.coursesCategory")}
               </span>
-            </Link>
+            </NavLink>
           </li>
           <li className="sidebar-item">
             <a className="sidebar-link">
