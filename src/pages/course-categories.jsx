@@ -6,6 +6,7 @@ import Modal from "../components/modal";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import AddCategory from "../features/categories/components/add-category";
+import { useCategoryContext } from "../features/categories/category-context";
 
 const CourseCategories = () => {
   const data = useLoaderData();
@@ -14,6 +15,7 @@ const CourseCategories = () => {
   const [showAddCategory, setShowAddCategory] = useState(false);
 
   const navigate = useNavigate();
+  const {category} = useCategoryContext();
 
   const {t} = useTranslation()
 
@@ -61,7 +63,7 @@ const CourseCategories = () => {
               <i class="fas fa-plus ms-2"></i>افزودن دسته جدید
             </a>
           </div>
-          {showAddCategory && <AddCategory setShowAddCategory={setShowAddCategory}/>}
+          {(showAddCategory || category) && <AddCategory setShowAddCategory={setShowAddCategory}/>}
           <Suspense
             fallback={<p className="text-info"> در حال دریافت اطلاعات ...</p>}
           >

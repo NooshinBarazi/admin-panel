@@ -2,16 +2,18 @@ import { createContext, useContext, useState } from "react";
 
 const CategoryContext = createContext();
 
-const CategoryProvider = ({children})=>{
-    const [category, setCategory] = useState();
+const CategoryProvider = ({ children }) => {
+  const [category, setCategory] = useState();
 
-    <CategoryContext.Provider value={{category, setCategory}}>
-        {children}
+  return (
+    <CategoryContext.Provider value={{ category, setCategory }}>
+      {children}
     </CategoryContext.Provider>
-}
+  );
+};
 
-const useCategoryContext = ()=>{
-    return useContext(CategoryContext)
-}
+const useCategoryContext = () => {
+  return useContext(CategoryContext);
+};
 
-export {useCategoryContext, CategoryProvider}
+export { useCategoryContext, CategoryProvider };

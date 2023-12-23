@@ -3,18 +3,32 @@ import { httpInterseptedService } from "../../../core/http-service";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import {useNavigate} from 'react-router-dom'
+import { useCategoryContext } from "../category-context";
+import { useEffect } from "react";
 
 const AddCategory = ({ setShowAddCategory }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const navigate
-  
-  = useNavigate();
-  const {t} = useTranslation()
+  const navigate = useNavigate();
+  const {t} = useTranslation();
+  const {category, setCategory} = useCategoryContext();
+
+  useEffect(()=>{
+    if(category){
+      setValue('name', category.name);
+      setValue('id', category.id)
+    }
+  },[category])
+
+  const onClose = ()=>{
+    setShowAddCategory(false)
+    setCategory(null);
+  }
 
   const onSubmit = (data) => {
     setShowAddCategory(false);
@@ -27,6 +41,9 @@ const AddCategory = ({ setShowAddCategory }) => {
           render() {
             const url = new URL(window.location.href);
             navigate(url.pathname + url.search);
+            if(category){
+              setCategory(null)
+            }
             return "عملیات با موفقیت انجام شد";
           },
         },
@@ -69,7 +86,7 @@ const AddCategory = ({ setShowAddCategory }) => {
             <button
               type="button"
               className="btn btn-secondary btn-larg ms-2"
-              onClick={() => setShowAddCategory(false)}
+              onClick={onClose}
             >
               بستن
             </button>
